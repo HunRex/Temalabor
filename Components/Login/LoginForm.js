@@ -27,9 +27,7 @@ export default class LoginForm extends Component {
     componentWillMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
     }
-    componentDidMount() {
 
-    }
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
     }
@@ -100,8 +98,6 @@ export default class LoginForm extends Component {
     }
 
     loginCheck = () => {
-       // Alert.alert( 'Login', 'Authentication...',
-          //  [ ,] )
         this.setState({
             disabled : true,
         })
@@ -116,33 +112,16 @@ export default class LoginForm extends Component {
                 password: this.state.pword
             })
         }) .then(response => {
-            // response from server
-            // here you can check status of response and handle it manually
             switch (response.status) {
                 case 401: alert('Unauthorized'); break;
                 case 400: alert('Unauthorized'); break;
             }
-            // or you can check if status in the range 200 to 299
+
             if (response.ok) {
                 Keyboard.dismiss();
                 this.props.navigation.navigate('Main', {})
             }
         })
-
-
-        /*     .then(res => { if(res.status == 401){ alert("sajt"); return;}
-        else {(res => res.json())
-            .then((res => {
-                // Alert.alert("Login", "Succesfull login")
-
-                Keyboard.dismiss();
-                this.props.navigation.navigate('Main', {})
-
-            }))}})
-
-        this.setState({
-            disabled : false,
-        })*/
 
         this.setState({
             disabled :false,

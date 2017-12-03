@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet , Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView,
-    BackHandler} from 'react-native';
+    BackHandler, Alert} from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import MainScreen from "../MainScreen";
 import ActionButton from "react-native-action-button";
@@ -28,6 +28,43 @@ export default class DetailsScreen extends Component{
 
         this.props.navigation.goBack(null);
         return true;
+    }
+
+    deleteCheck = (item) => {
+        Alert.alert( 'Delete', 'Are you sure you want to delete this item?',
+            [ ,
+                {text: 'Cancel',  style: 'cancel'},
+                {text: 'Yes', onPress: () => this.deleteItem(item)} ] )
+    }
+
+    async deleteItem (item) {
+
+        var t = this.props.navigation.state.params.t;
+
+        if (item.package_type == 'invoice') {
+            fetch('https://hidden-dusk-48885.herokuapp.com/api/invoices/' + item.packageId, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    kiskapu: "alma",
+                    'Authorization': 'Bearer '
+                },
+
+            })
+        } else {
+            fetch('https://hidden-dusk-48885.herokuapp.com/api/mails/' + item.packageId, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    kiskapu: "alma",
+                    'Authorization': 'Bearer '
+                },
+            })
+        }
+        this.props.navigation.navigate('Main', {})
+
     }
 
 
@@ -220,10 +257,16 @@ export default class DetailsScreen extends Component{
                 </View>
                 }
             </ScrollView>
-                <ActionButton buttonColor="rgba(0,50,250,1)"  icon={<Icon name='create' size={25} />}
-                      onPress = {() => this.props.navigation.navigate('Edit', {ba: m, ex:p})}
+                <ActionButton offsetY={100} buttonColor="rgba(250,50,0,1)"  icon={<Icon name='create' size={25} />}
+                              onPress = {() => this.props.navigation.navigate('Edit', {ba: m, ex:p})}
                 >
                     <Icon name="create" style={styles.actionButtonIcon} />
+                </ActionButton>
+                <ActionButton buttonColor="rgba(0,50,250,1)"  icon={<Icon name='delete' size={25} />}
+                              onPress = {() => this.deleteCheck(this.props.navigation.state.params.mail)}
+
+                >
+                    <Icon name="delete" style={styles.actionButtonIcon} />
                 </ActionButton>
             </View>
         )
@@ -236,10 +279,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         fontWeight: 'bold',
         fontSize: 20,
-    },
-
-    fab: {
-
     },
 
     textcont: {
