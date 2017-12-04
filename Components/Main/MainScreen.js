@@ -37,7 +37,7 @@ export default class MainScreen extends Component {
             },
             tmpdata: [],
             skey: '',
-            db: 20,
+            db: 15,
             offset: 0,
             error: null,
             refreshing: false,

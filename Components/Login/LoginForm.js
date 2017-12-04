@@ -44,18 +44,6 @@ export default class LoginForm extends Component {
         }
     }
 
-    getName = (value) => {
-        this.setState({
-            uname: value,
-        })
-    }
-
-    getPassword = (value) => {
-        this.setState({
-            pword: value
-        })
-    }
-
     render() {
         console.disableYellowBox = true;
         return (
@@ -81,9 +69,12 @@ export default class LoginForm extends Component {
                     activeOpacity={this.state.disabled ? 1 : 0.7}
                     disabled={this.state.disabled}
                     onPress={
-                        () =>
-                        this.loginCheck()
-                    }
+                        () => {
+                            this.setState({disabled : true},
+                            this.loginCheck(),
+                                )
+
+                        }}
                     ref={(item) => { this.btn = item }}
                     style={styles.lgnbtn}
                 >
@@ -113,19 +104,28 @@ export default class LoginForm extends Component {
             })
         }) .then(response => {
             switch (response.status) {
-                case 401: alert('Unauthorized'); break;
-                case 400: alert('Unauthorized'); break;
+                case 401: alert('Unauthorized');
+                    this.setState({
+                        disabled :false,
+                    })
+                    break;
+                case 400: alert('Unauthorized');
+                    this.setState({
+                        disabled :false,
+                    })
+                    break;
             }
 
             if (response.ok) {
                 Keyboard.dismiss();
+                this.setState({
+                    disabled :false,
+                })
+
                 this.props.navigation.navigate('Main', {})
             }
         })
 
-        this.setState({
-            disabled :false,
-        })
 
     }
 }
