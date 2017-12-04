@@ -45,7 +45,7 @@ export default class AddItemScreen extends Component {
         isValidMail = () => {
             var v = this.state;
             if (v.subject.length > 0 && v.adress.length > 0 && v.city.length > 0 && ("" + v.zip).length > 0 &&
-                v.category.length > 0  && v.sender.length > 0) {
+                v.category.length > 0 ) {
                 return true
             }else {
                 return false
@@ -99,7 +99,6 @@ export default class AddItemScreen extends Component {
                         package_comment: this.state.package_comment,
                         subject: this.state.subject,
                         time: this.state.time,
-                        sender: this.state.sender,
                         brutto: Number.parseInt(this.state.brutto, 10),
                         netto: Number.parseInt(this.state.netto, 10),
                         expiry: Number.parseInt(this.state.expiry, 10),
@@ -142,7 +141,7 @@ export default class AddItemScreen extends Component {
                         package_comment: this.state.package_comment,
                         subject: this.state.subject,
                         time: this.state.time,
-                        sender: this.state.sender,
+                      //  sender: this.state.sender,
                         category: this.state.category,
                         delivery_type: this.state.delivery_type,
                         count: Number.parseInt(this.state.count, 10),
@@ -343,15 +342,6 @@ export default class AddItemScreen extends Component {
                         <Picker.Item label="normal" value="normal" />
                         <Picker.Item label="express" value="express" />
                     </Picker>
-                    <Text style={styles.content}> Sender: </Text>
-                    <TextInput
-                        returnKeyType="go"
-                        placeholder="Sender goes here"
-                        editable={true}
-                        style={styles.textcont}
-                        onSubmitEditing={() => { this.cat.focus() }}
-                        onChangeText={(value) => this.setState({sender:value})}
-                    />
                     <Text style={styles.content}> Category: </Text>
                     <TextInput
                         returnKeyType="go"

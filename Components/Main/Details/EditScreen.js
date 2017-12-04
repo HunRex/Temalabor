@@ -103,7 +103,7 @@ export default class EditScreen extends Component {
                         city: this.state.city,
                         zip: Number.parseInt(this.state.zip, 10),
                     },
-                    sender: this.state.invoice.sender,
+                   // sender: this.state.invoice.sender,
                     division: this.state.division,
                     package_comment: this.state.package_comment,
                     subject: this.state.subject,
@@ -216,15 +216,29 @@ export default class EditScreen extends Component {
                     <Picker.Item label="gazette" value="gazette" />
                 </Picker>
                 <Text style = {styles.content}>
-                    Subject:
+                    Division:
                 </Text>
-                <TextInput
-                    returnKeyType = "go"
-                    value = {this.state.subject}
-                    editable = {true }
-                    style = {styles.textcont}
-                    onChangeText = {(itemv) => this.setState({subject: itemv})}
-                />
+                <Picker
+                    selectedValue={this.state.division}
+                    onValueChange={(item) => this.setState({division: item})
+                    }
+
+                >
+                    <Picker.Item label="Dia" value="Dia" />
+                    <Picker.Item label="RX" value="RX" />
+                </Picker>
+                <Text style = {styles.content}>
+                    Admin:
+                </Text>
+                <Picker
+                    selectedValue={this.state.admin}
+                    onValueChange={(itemv) => this.setState({admin: itemv})}
+                >
+                    <Picker.Item label="Lilla" value="Lilla" />
+                    <Picker.Item label="Jancsi" value="Jancsi" />
+                    <Picker.Item label="Peti" value="Peti" />
+                    <Picker.Item label="Klára" value="Klára" />
+                </Picker>
                 <DatePicker
                     style={{width: '100%'}}
                     date={this.state.time}
@@ -247,6 +261,16 @@ export default class EditScreen extends Component {
                         }
                     }}
                     onDateChange={(date) => {this.setState({time: date})}}
+                />
+                <Text style = {styles.content}>
+                    Subject:
+                </Text>
+                <TextInput
+                    returnKeyType = "go"
+                    value = {this.state.subject}
+                    editable = {true }
+                    style = {styles.textcont}
+                    onChangeText = {(itemv) => this.setState({subject: itemv})}
                 />
                 <View  style = {styles.fontV}>
                     <FormLabel
@@ -273,32 +297,6 @@ export default class EditScreen extends Component {
                                onChangeText = {(itemv) => this.setState({adress: itemv})}/>
 
                 </View>
-
-                <Text style = {styles.content}>
-                    Division:
-                </Text>
-                <Picker
-                    selectedValue={this.state.division}
-                    onValueChange={(item) => this.setState({division: item})
-                    }
-
-                >
-                    <Picker.Item label="Dia" value="Dia" />
-                    <Picker.Item label="RX" value="RX" />
-                </Picker>
-                <Text style = {styles.content}>
-                    Admin:
-                </Text>
-                <Picker
-                    selectedValue={this.state.admin}
-                    onValueChange={(itemv) => this.setState({admin: itemv})}
-                >
-                    <Picker.Item label="Lilla" value="Lilla" />
-                    <Picker.Item label="Jancsi" value="Jancsi" />
-                    <Picker.Item label="Peti" value="Peti" />
-                    <Picker.Item label="Klára" value="Klára" />
-                </Picker>
-
                 <Text style = {styles.content}>
                     Comment:
                 </Text>
@@ -339,14 +337,6 @@ export default class EditScreen extends Component {
                         <Picker.Item label="normal" value="normal" />
                         <Picker.Item label="express" value="express" />
                     </Picker>
-                    <Text style={styles.content}> Sender: </Text>
-                    <TextInput
-                        returnKeyType="go"
-                        value ={this.state.invoice.sender}
-                        editable={true}
-                        style={styles.textcont}
-                        onChangeText={(value) => this.setState({sender:value})}
-                    />
                     <Text style={styles.content}> Count: </Text>
                     <TextInput
                         keyboardType="numeric"

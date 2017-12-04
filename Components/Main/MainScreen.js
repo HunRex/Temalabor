@@ -52,7 +52,6 @@ export default class MainScreen extends Component {
         fetch('https://hidden-dusk-48885.herokuapp.com/api/invoices/' + item.packageId)
             .then(res => res.json())
             .then(res => {
-                i.sender = res.sender;
                 i.netto = res.netto;
                 i.brutto = res.brutto;
                 i.expiry = res.expiry;
@@ -66,6 +65,7 @@ export default class MainScreen extends Component {
         fetch('https://hidden-dusk-48885.herokuapp.com/api/mails/' + item.packageId)
             .then(res => res.json())
             .then(res => {
+              // i.sender = res.sender;
                 i.weight = res.weight;
                 i.category = res.category;
                 i.count = res.count;

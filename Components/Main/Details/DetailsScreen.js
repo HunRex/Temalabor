@@ -150,14 +150,6 @@ export default class DetailsScreen extends Component{
                 </Text>
                 {m.package_type == 'invoice' &&
                 <View>
-                    <Text style={styles.content}> Sender: </Text>
-                    <TextInput
-                        returnKeyType="go"
-                        placeholder={p.sender}
-                        editable={false}
-                        style={styles.textcont}
-                        keyboardType="numeric"
-                    />
                     <Text style={styles.content}> Invoice#: </Text>
                     <TextInput
                         returnKeyType="go"
@@ -257,12 +249,12 @@ export default class DetailsScreen extends Component{
                 </View>
                 }
             </ScrollView>
-                <ActionButton offsetY={100} buttonColor="rgba(250,50,0,1)"  icon={<Icon name='create' size={25} />}
+                <ActionButton offsetX={15} offsetY={100} buttonColor="rgba(250,50,0,1)"  icon={<Icon name='create' size={25} />}
                               onPress = {() => this.props.navigation.navigate('Edit', {ba: m, ex:p})}
                 >
                     <Icon name="create" style={styles.actionButtonIcon} />
                 </ActionButton>
-                <ActionButton buttonColor="rgba(0,50,250,1)"  icon={<Icon name='delete' size={25} />}
+                <ActionButton offsetX={15} buttonColor="rgba(0,50,250,1)"  icon={<Icon name='delete' size={25} />}
                               onPress = {() => this.deleteCheck(this.props.navigation.state.params.mail)}
 
                 >
