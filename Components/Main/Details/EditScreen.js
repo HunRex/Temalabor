@@ -231,8 +231,9 @@ export default class EditScreen extends Component {
                     Admin:
                 </Text>
                 <Picker
-                    selectedValue={this.state.admin}
-                    onValueChange={(itemv) => this.setState({admin: itemv})}
+                    selectedValue={this.state.admin.name}
+                    onValueChange={(itemv) =>  this.setState({admin:{
+                        name:itemv}})}
                 >
                     <Picker.Item label="Lilla" value="Lilla" />
                     <Picker.Item label="Jancsi" value="Jancsi" />

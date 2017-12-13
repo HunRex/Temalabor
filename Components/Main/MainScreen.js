@@ -90,9 +90,9 @@ export default class MainScreen extends Component {
         }
 
 
-    componentWillMount() {
+    async componentWillMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-        this.makeRemoteRequest();
+        await this.makeRemoteRequest();
     }
 
     componentWillUnmount() {
@@ -126,7 +126,8 @@ export default class MainScreen extends Component {
         this.setState(
             {
                 offset: 0,
-                refreshing: true
+                refreshing: true,
+                data: []
             },
             () => {
                 this.makeRemoteRequest();
@@ -136,6 +137,7 @@ export default class MainScreen extends Component {
     handleLoadMore = () => {
         this.setState(
             {
+                loading: true,
                 offset: this.state.offset + 15,
             }, () => {this.makeRemoteRequest()}
 
@@ -193,13 +195,14 @@ export default class MainScreen extends Component {
 
     }
 
-    makeRemoteRequest() {
+     async makeRemoteRequest() {
         const { db, offset , page} = this.state;
         const url = `https://hidden-dusk-48885.herokuapp.com/api/packages/?offset=${this.state.offset}&count=${this.state.db}`;
         this.setState({ loading: true });
-        fetch(url)
+        await fetch(url, {method: 'GET'})
             .then(res => res.json())
             .then(res => {
+                setTimeout(() => null, 0);
                 this.setState({
                     data: page === 1 ? res.content : [...this.state.data, ...res.content],
                     loading: false,
