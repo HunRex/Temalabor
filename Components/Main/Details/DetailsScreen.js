@@ -59,7 +59,7 @@ export default class DetailsScreen extends Component{
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     kiskapu: "alma",
-                    'Authorization': 'Bearer '
+                    //Authorization: 'Bearer '
                 },
             })
         }
